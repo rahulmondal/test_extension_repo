@@ -1,0 +1,42 @@
+version: '3'
+volumes:
+  node_modules:
+
+services:
+  my_awesome_project_dev:
+    container_name: my_awesome_project_dev
+    build:
+      context: .
+    working_dir: /extension
+    command: cextrun -d --no-rich-logging
+    volumes: 
+      - .:/extension
+      - node_modules:/extension/node_modules
+    env_file:
+      - .my_awesome_project_dev.env
+
+  my_awesome_project_bash:
+    container_name: my_awesome_project_bash
+    build:
+      context: .
+    working_dir: /extension
+    command: /bin/bash
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/extension
+      - node_modules:/extension/node_modules
+    env_file:
+      - .my_awesome_project_dev.env
+
+  my_awesome_project_test:
+    container_name: my_awesome_project_test
+    build:
+      context: .
+    working_dir: /extension
+    command: extension-test
+    volumes:
+      - .:/extension
+      - node_modules:/extension/node_modules
+    env_file:
+      - .my_awesome_project_dev.env

@@ -1,0 +1,7 @@
+*.pyc
+htmlcov
+.coverage
+coverage.xml
+.my_awesome_project_dev.env
+node_modules
+ui/tests/coverage
